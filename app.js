@@ -43,17 +43,11 @@ function calcularTotalSaldo() {
   let saldo = 0;
 
   for (let mov of movimientos) {
-    // Recorre el array de movimientos
-    if (mov.tipo === "ingreso") {
-      // Si el tipo es 'Ingreso', suma el monto al saldo
-      saldo += mov.monto;
-    } else if (mov.tipo === "egreso") {
-      // Si el tipo es 'Egreso', resta el monto del saldo
-      saldo -= mov.monto;
+    saldo += mov.tipo === "ingreso" ? mov.monto : -mov.monto; // Suma o resta el monto según el tipo de movimiento
     }
     return saldo; // Devuelve el saldo total
   }
-}
+
 function mostrarResumen() {
   let totalIngreso = 0;
   let totalEgreso = 0;
@@ -82,7 +76,7 @@ function mostrarResumen() {
   let resumen =
     `Resumen Final:\n` +
     `Cantidad de movimientos: ${movimientos.length}\n` +
-    `Saldo total: ${saldo}\n` +
+    `Saldo total: $${saldo}\n` +
     `Desglose por tipo:\n`;
   if (totalIngreso > 0) resumen += `- Ingresos: $${totalIngreso.toFixed(2)}\n`;
   if (totalEgreso > 0) resumen += `- Egresos: $${totalEgreso.toFixed(2)}\n`;
